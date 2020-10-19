@@ -24,10 +24,36 @@ Commit your code regularly and meaningfully. This helps both you (in case you ev
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
 1. What problem does the context API help solve?
+
+A: 
+- Context API helps to solve the drilling problem, which is passing state props from one parent to next child to a grand child, even if the child is not goint to use it. With Context API grandchild can access the state wout the need to have it in its parent
+
 2. In your own words, describe `actions`, `reducers` and the `store` and their role in Redux. What does each piece do? Why is the store known as a 'single source of truth' in a redux application?
+
+A: 
+- React is continously trying to update UI (Component) with a given state. Previously we were doing this via updating state object directly in each component with setState function.
+However when there is a complex and large App state, we are using redux to have one large App state object, and not to update it but instead copy that object and change the specific keys of that object based on UI input
+In order to do this, Redux introduces:
+- Store: we create a gloabl store in index.js and wrap our APP with Provider and pass the store to all components. This becomes our primary App state
+- Actions:  We define which type of functionalities user will have to update the state, and Component calls action instead of calling setState function.
+- Reducers: aRe pure functionalities that are called by actions and these functionalities return a new copy of the state and our state becomes the latest copy
+
 3. What is the difference between Application state and Component state? When would be a good time to use one over the other?
+
+A: 
+- App state is a universal state that gets passed to all components and can be only paased to component propos via connect() method
+- Component state only lives within a given component and can only passed to child component via props that are passed inside the component
+
 4. Describe `redux-thunk`, what does it allow us to do? How does it change our `action-creators`?
+
+A:
+- Thunk: Allows us to do async calls , especially when we need to update the state via axios calls, it allows us to identify each stage of call (START, Succes, Fail) and update UI accordingly
+- Action-creators: With thunk we can intorduce middlewares and with those middlewares we can control what actions can or can't pass into reducers to create a new state.
+
 5. What is your favorite state management system you've learned and this sprint? Please explain why!
+
+A: I think Context API can be very useful and simple since it is very easy to implement and also change its state, however it doesn't replace Redux in regards to having a global unified state for very complex apps. So a mix of Context API with Async Redux can be helpful for complex apps.
+
 
 You are expected to be able to answer questions in these areas. Your responses contribute to your Sprint Challenge grade. 
 
