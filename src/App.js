@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 
 import AddForm from './components/AddForm';
 import SmurfDisplay from './components/SmurfDisplay';
@@ -7,9 +7,17 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
 
-//Test Codegrade
+
 
 class App extends Component {
+
+  componentDidMount() {
+    axios.get('http://localhost:3333/smurfs')
+    .then(res => console.log(res.data)) 
+    .catch(err => console.log(err))
+  }
+   
+  
   render() {
     return (
       <div className="App">

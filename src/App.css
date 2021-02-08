@@ -29,6 +29,13 @@ section {
   /* height: 100%;
   min-width:250px; */
   flex: 0 1 24%;
+  border: 2px solid black;
+  margin: 1% 2% auto;
+  display: flex;
+  align-items: center;
+  /* box-shadow: 2px 2px 1px 2px rgb(104, 108, 109); */
+  background-color: rgba(101, 117, 117, 0.2);
+  border-radius: 20px;
 }
 
 .card-title {

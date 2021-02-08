@@ -1,14 +1,38 @@
-import React from 'react';
+import React from "react";
+import { connect } from "react-redux";
+import { Alert } from "reactstrap";
+import { fetchSmurfs } from "../actions";
+import Smurf from "./Smurf";
 
 export class SmurfDisplay extends React.Component {
-    render() {
-        return(<div>
-            
-        </div>)
-    }
+  componentDidMount() {
+    this.props.fetchSmurfs();
+  }
+
+  render() {
+    return (
+      <div>
+        {this.props.isFetching && <Alert color = "primary"> Fetching Smurf Data</Alert>}
+        {this.props.error && <Alert color = "danger"> Not able to fetch data</Alert>}
+        <div className="smurfs">
+          {this.props.smurfs.map((smurf) => (
+            <Smurf smurf={smurf} />
+          ))}
+        </div>
+      </div>
+    );
+  }
 }
 
-export default SmurfDisplay;
+const mapStateToProps = (state) => {
+  return {
+    smurfs: state.smurfs,
+    error: state.error,
+    isFetching: state.isFetching,
+  };
+};
+
+export default connect(mapStateToProps, { fetchSmurfs })(SmurfDisplay);
 
 //Task List:
 //1. Import in all needed components and library methods.
