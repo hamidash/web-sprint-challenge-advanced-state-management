@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { addSmurf } from "../actions";
-import { Alert } from "reactstrap";
+import { Alert, Button, Form } from "reactstrap";
 
 class AddForm extends React.Component {
   constructor() {
@@ -69,11 +69,13 @@ class AddForm extends React.Component {
                 id="description"
                 cols="30"
                 rows="10"
-                placeholder="Enter description"
+                placeholder="Enter Description"
                 value={this.state.description}
               />
             </div>
-            <button>Submit Smurf</button>
+            <Button color="primary" size="lg">
+              Submit Smurf
+            </Button>
           </form>
         )}
 

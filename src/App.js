@@ -10,12 +10,6 @@ import "./App.css";
 
 
 class App extends Component {
-
-  componentDidMount() {
-    axios.get('http://localhost:3333/smurfs')
-    .then(res => console.log(res.data)) 
-    .catch(err => console.log(err))
-  }
    
   
   render() {

@@ -19,10 +19,11 @@ export const fetchSmurfs = () => (dispatch) => {
 };
 
 export const addSmurf = (smurfData) => (dispatch) => {
-  !smurfData.name ||
-    !smurfData.nickname ||
-    !smurfData.position ||
-    dispatch({ type: POST_SMURF_FORM_FAIL });
+  // if one of 3 required form fields is empty,
+  // thunk dispatches FORM FAIL message, and exits the function
+  if (!smurfData.name || !smurfData.nickname || !smurfData.position) {
+    return dispatch({ type: POST_SMURF_FORM_FAIL });
+  }
 
   dispatch({ type: POST_SMURF_START });
   axios
