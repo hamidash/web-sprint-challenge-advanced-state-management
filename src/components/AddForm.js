@@ -1,24 +1,108 @@
-import React from 'react';
+import React from "react";
+import { connect } from "react-redux";
+import { addSmurf } from "../actions";
+import { Alert } from "reactstrap";
 
 class AddForm extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      name: "",
+      position: "",
+      nickname: "",
+      description: "",
+    };
+  }
 
-    render() {
-        return(<section>
-            <h2>Add Smurf</h2>
-            <form>
-                <div className="form-group">
-                    <label htmlFor="name">Name:</label><br/>
-                    <input onChange={this.handleChange} name="name" id="name" />
-                </div>
+  handleChange = (e) => {
+    this.setState({
+      ...this.state,
+      [e.target.name]: e.target.value,
+    });
+  };
 
-                <div data-testid="errorAlert" className="alert alert-danger" role="alert">Error: </div>
-                <button>Submit Smurf</button>
-            </form>
-        </section>);
-    }
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.props.addSmurf(this.state);
+    this.setState({
+      name: "",
+      position: "",
+      nickname: "",
+      description: "",
+    });
+  };
+
+  render() {
+    return (
+      <section>
+        <h2>Add Smurf</h2>
+        {!this.props.isFetching && (
+          <form onSubmit={this.handleSubmit}>
+            <div className="form-group">
+              {/* <label htmlFor="name">Name:</label><br/> */}
+              <input
+                onChange={this.handleChange}
+                name="name"
+                id="name"
+                placeholder="Enter Name"
+                value={this.state.name}
+              />
+              <input
+                onChange={this.handleChange}
+                type="text"
+                name="position"
+                id="position"
+                placeholder="Enter Poisition"
+                value={this.state.position}
+              />
+              <input
+                onChange={this.handleChange}
+                type="text"
+                name="nickname"
+                id="nickname"
+                placeholder="Enter Nickname"
+                value={this.state.nickname}
+              />
+              <textarea
+                onChange={this.handleChange}
+                name="description"
+                id="description"
+                cols="30"
+                rows="10"
+                placeholder="Enter description"
+                value={this.state.description}
+              />
+            </div>
+            <button>Submit Smurf</button>
+          </form>
+        )}
+
+        {this.props.formIsFetching && (
+          <Alert color="primary"> Sending Form</Alert>
+        )}
+
+        {this.props.formError && (
+          <div
+            data-testid="errorAlert"
+            className="alert alert-danger"
+            role="alert"
+          >
+            Error: {this.props.formError}
+          </div>
+        )}
+      </section>
+    );
+  }
 }
 
-export default AddForm;
+const mapStateToProps = (state) => {
+  return {
+    formIsFetching: state.isFetching,
+    formError: state.error,
+  };
+};
+
+export default connect(mapStateToProps, { addSmurf })(AddForm);
 
 //Task List:
 //1. Add in all necessary import components and library methods.

@@ -13,7 +13,7 @@ export class SmurfDisplay extends React.Component {
     return (
       <div>
         {this.props.isFetching && <Alert color = "primary"> Fetching Smurf Data</Alert>}
-        {this.props.error && <Alert color = "danger"> Not able to fetch data</Alert>}
+        {!this.props.smurfs && <Alert color = "danger"> Not able to fetch data</Alert>}
         <div className="smurfs">
           {this.props.smurfs.map((smurf) => (
             <Smurf smurf={smurf} />
